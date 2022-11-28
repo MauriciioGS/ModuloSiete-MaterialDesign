@@ -1,0 +1,68 @@
+package mx.mauriciogs.modulosiete
+
+import android.content.Intent
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.MenuItem
+import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
+import com.google.android.material.navigation.NavigationView
+import mx.mauriciogs.modulosiete.activities.*
+
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+
+    private lateinit var drawer: DrawerLayout
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+        inicioToolsBar()
+    }
+
+    private fun inicioToolsBar() {
+        val toolbar: androidx.appcompat.widget.Toolbar = findViewById(R.id.toolbar_main)
+        setSupportActionBar(toolbar)
+
+        drawer = findViewById(R.id.drawer_layout)
+        val toggle = ActionBarDrawerToggle(this, drawer, toolbar, R.string.abrir, R.string.cerrar)
+        drawer.addDrawerListener(toggle)
+        toggle.syncState()
+        toolbar.setNavigationIcon(R.drawable.unam_32)
+        iniciarNavView()
+    }
+
+    private fun iniciarNavView() {
+        val navegacionView = findViewById<NavigationView>(R.id.nav_view)
+        navegacionView.setNavigationItemSelectedListener(this)
+        val headerView = LayoutInflater.from(this).inflate(R.layout.header_main, navegacionView, false)
+        navegacionView.addHeaderView(headerView)
+    }
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            R.id.constraint_layout -> {
+                startActivity(Intent(this, ConstraintActivity::class.java))
+            }
+            R.id.nestedscrollview -> {
+                startActivity(Intent(this, NestedScrollActivity::class.java))
+            }
+            R.id.collapsing -> {
+                startActivity(Intent(this, CollapsingToolbarLayoutActivity::class.java))
+            }
+            R.id.recycler_view -> {
+                startActivity(Intent(this, RecylerViewActivity::class.java))
+            }
+            R.id.video_viewer -> {
+                startActivity(Intent(this, VideoActivity::class.java))
+            }
+            R.id.sound -> {
+                startActivity(Intent(this, SoundActivity::class.java))
+            }
+        }
+        drawer.closeDrawer(GravityCompat.START)
+        return true
+    }
+
+}
