@@ -60,6 +60,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.sound -> {
                 startActivity(Intent(this, SoundActivity::class.java))
             }
+            R.id.loginFirebase -> {
+                startActivity(Intent(this, LoginActivity::class.java))
+            }
         }
         drawer.closeDrawer(GravityCompat.START)
         return true

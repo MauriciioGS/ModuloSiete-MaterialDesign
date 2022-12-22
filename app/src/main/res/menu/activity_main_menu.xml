@@ -8,6 +8,10 @@
             android:title="@string/material_design">
             <menu>
                 <item
+                    android:id="@+id/loginFirebase"
+                    android:icon="@drawable/ic_baseline_person_24"
+                    android:title="@string/login"/>
+                <item
                     android:id="@+id/constraint_layout"
                     android:icon="@drawable/ic_baseline_school_24"
                     android:title="@string/constraint_layout"/>
